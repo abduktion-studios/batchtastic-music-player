@@ -1,1 +1,0 @@
-x=MsgBox("A log file cannot be found. It was most likely deleted.     (ERROR 0x80070002: OBJECT DOES NOT EXIST)", 0+16, "Batchtastic Music Player")
