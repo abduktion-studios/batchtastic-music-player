@@ -28,5 +28,5 @@ Windows command line. It can play both local audio and MIDI files, as well as st
 
 # Known issues
 - When entering the 'x' command in the Log Reader to close it, the log file still opens in the system text editor
-- Certain ISPs block connections to the host of Batchtastic's update database, preventing the software from checking for updates
+- Certain ISPs block connections to the host of Batchtastic's update database, preventing the software from checking for updates properly. In this case, the program will inform the user of a new update regardless of it there is one or not.
 
