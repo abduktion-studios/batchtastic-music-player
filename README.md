@@ -19,6 +19,7 @@ Windows command line. It can play both local audio and MIDI files, as well as st
 - Dialog windows are now part of the program's UI (instead of being VBS message boxes) and have custom sounds.
 - Script files are no longer created on-the-spot, and are always present in program files
 - Log files are now dated and are no longer deleted when the program closes
+- The program will now refuse to check for updates or stream audio from the internet (and warn the user) if there is no network connection
 
 # What's been fixed in this version
 - An installer issue causing the desktop and Start menu shortcuts to have blank icons rather than the program icon
@@ -28,5 +29,5 @@ Windows command line. It can play both local audio and MIDI files, as well as st
 
 # Known issues
 - When entering the 'x' command in the Log Reader to close it, the log file still opens in the system text editor
-- Certain ISPs block connections to the host of Batchtastic's update database, preventing the software from checking for updates properly. In this case, the program will inform the user of a new update regardless of it there is one or not.
+- Certain ISPs block connections to the host of Batchtastic's update database, preventing the software from checking for updates properly. In this case, the program will inform the user of a new update regardless of if there is one or not.
 
