@@ -1,4 +1,4 @@
-# Batchtastic Music Player - Version 9.2.7.2 "Raptrix"
+# Batchtastic Music Player - Version 9.2.9.5 "Raptrix"
 Batchtastic Music Player is an application written in Batch and Visual Basic designed to allow users to play music through the 
 Windows command line. It can play both local audio and MIDI files, as well as stream them from websites and file servers. 
 # Features
@@ -8,24 +8,23 @@ Windows command line. It can play both local audio and MIDI files, as well as st
 - User-friendly text-based UI
 - UI themes (dark and light respectivley)
 - Activity log and log viewer
-- Update scanner and downloader
+- Update scanner, downloader, and installer
 - Dialogs with custom sounds and messages for errors, warnings, and general information
 - EULA, GPL, and Creative Commons licences viewer
 - Saved user settings and personalization options
 
 # What's new in this version
-- Updated installer with Batchtastic branding, splash screen, and audio
-- Program files are now stored locally rather than on a file server in both Program Files and temporary directories
-- Dialog windows are now part of the program's UI (instead of being VBS message boxes) and have custom sounds.
-- Script files are no longer created on-the-spot, and are always present in program files
-- Log files are now dated and are no longer deleted when the program closes
-- The program will now refuse to check for updates or stream audio from the internet (and warn the user) if there is no network connection
+- Batchtastic can now download update files and install them itself.
+- Sounds can now be toggled on and off at the user’s request.
+- Additional return commands added to more menus.
 
 # What's been fixed in this version
-- An installer issue causing the desktop and Start menu shortcuts to have blank icons rather than the program icon
 - Localization issues and typos
-- A permissions issue causing Batchtastic requiring to be ran as administrator to update log files, user theme settings, etc.
-- Batchtastic will no longer attempt to stream audio from the internet or check for updates when there is no network connection
+- UX formatting on certain menus (Open Audio, Theme Changer, etc.)
+- The command to view the activity log is of higher priority, and is now option 2 on the Configuration Panel
+
+# Removed features
+ - Option 2 of the Configuration Panel “Open working directory” has been removed and replaced with “Enable/disable sounds” command.
 
 # Known issues
 - When entering the 'x' command in the Log Reader to close it, the log file still opens in the system text editor
