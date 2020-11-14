@@ -1,0 +1,2913 @@
+@echo off 
+chcp 65001 >nul
+title Batchtastic Music Player>nul
+Mode con cols=80 lines=11 >nul
+
+
+
+set wersja=10.0.6.7
+set intwer=9.5.7.7
+set nazwakompilacji=Zygoptera
+set kompilacji=BATAST-ZYG-EN1167
+set appdata=C:\ProgramData\GreenDarnerSoftware\BatchtasticMusicPlayer
+set log=%appdata%\resources\log\BATASLOG-%DATE%.wind
+set download=%appdata%\resources\download
+
+if exist "C:\ProgramData\GreenDarner\BatchtasticMusicPlayer\" (goto :templogcreate) else (md C:\ProgramData\GreenDarnerSoftware\BatchtasticMusicPlayer) >nul
+
+:templogcreate
+md %appdata%\resources\log\>nul
+:tempscriptscreate
+md %appdata%\scripts\>nul
+:tempconfigcreate
+md %appdata%\config\>nul
+:tempusercreate
+md %appdata%\config\user\>nul
+:tempdownloadcreate
+md %appdata%\resources\download\>nul
+
+
+:launcher
+if not exist %appdata%\config\user\SoundsDisabled (echo true >>%appdata%\config\user\SoundsEnabled)
+if exist %appdata%\config\user\LightModeEnabled (color 70) else (color 07) >nul
+if exist %appdata%\config\user\LightModeEnabled (set kolor=70) else (set kolor=07) >nul
+if exist %appdata%\config\user\LightModeEnabled (set kolor=70) else (echo true >>%appdata%\config\user\DarkModeEnabled) >nul
+if not exist %appdata%\config\user\LoopAudio (echo true>%appdata%\config\user\ConsecutiveAudio)
+if not exist %appdata%\config\user\LoopAudio (set playDesc=Consecutively Play) else (set playDesc=Infinitely Loop)
+set statusSymbol=■
+echo.
+
+cls
+setlocal enableDelayedExpansion>nul
+set /a size=80-1 &
+echo  -------- Welcome to Batchtastic %wersja% (%nazwakompilacji%)^! -------->>%log%
+echo [BATCHTASTIC LAUNCHER at %TIME%] Batchtastic Music Player application process initiated by %USERNAME% >>%log%
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Hello world^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo [BATCHTASTIC LAUNCHER at %TIME%] Loading startup sound... >>%log%
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Hello world^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+cls
+Set startsound=resources\scripts\StartSound.vbs >nul
+set exitsound=resources\scripts\ExitSound.vbs >nul
+Set StartURL=resources\sounds\startsound.wav>nul
+set ExitURL=resources\sounds\exitsound.wav>nul
+echo [BATCHTASTIC LAUNCHER at %TIME%] Initiated startup sound.>>%log%
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Hello world^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Hello world^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Hello world^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+echo.
+if exist resources\scripts\StartSound.vbs (goto :playstartsound) else goto :createstartsound
+:createstartsound
+echo Play "%StartURL%" >>%startsound%
+echo Sub Play(URL^) >>%startsound%
+echo    Dim Sound >>%startsound%
+echo    Set Sound = CreateObject("WMPlayer.OCX"^) >>%startsound%
+echo    Sound.URL = URL >>%startsound%
+echo    Sound.settings.volume = 100 >>%startsound%
+echo    Sound.Controls.play >>%startsound%
+echo    do while Sound.currentmedia.duration = 0 >>%startsound%
+echo        wscript.sleep 100 >>%startsound%
+echo    loop >>%startsound%
+echo    wscript.sleep (int(Sound.currentmedia.duration^)+1^)*1000 >>%startsound%
+echo End Sub >>%startsound%
+
+echo.
+if exist resources\scripts\ExitSound.vbs (goto :playstartsound) else goto :createexitsound
+:createexitsound
+echo Play "%ExitURL%" >>%exitsound%
+echo Play "%ExitURL%" >>%exitsound%
+echo Sub Play(URL^) >>%exitsound%
+echo    Dim Sound >>%exitsound%
+echo    Set Sound = CreateObject("WMPlayer.OCX"^) >>%exitsound%
+echo    Sound.URL = URL >>%exitsound%
+echo    Sound.settings.volume = 100 >>%exitsound%
+echo    Sound.Controls.play >>%exitsound%
+echo    do while Sound.currentmedia.duration = 0 >>%exitsound%
+echo        wscript.sleep 100 >>%exitsound%
+echo    loop >>%exitsound%
+echo    wscript.sleep (int(Sound.currentmedia.duration^)+1^)*1000 >>%exitsound%
+echo End Sub >>%exitsound%
+
+
+
+:playstartsound
+if not exist %appdata%\config\user\SoundsDisabled Start %startsound% >nul
+if not exist %appdata%\config\user\SoundsDisabled ping localhost -n 5 >nul
+
+
+:LogReaderSetup
+echo [BATCHTASTIC LAUNCHER at %TIME%] Setting up the Log Viewer...>>%log%
+
+del %appdata%\LogViewer.bat >nul
+echo @echo off >>%appdata%\LogViewer.bat
+echo title [Activity Log] - Batchtastic Reader >>%appdata%\LogViewer.bat
+echo Mode con cols=200 lines=40>>%appdata%\LogViewer.bat
+echo color %kolor%>>%appdata%\LogViewer.bat
+echo cls>>%appdata%\LogViewer.bat
+echo type %log%>>%appdata%\LogViewer.bat
+echo echo.>>%appdata%\LogViewer.bat
+echo echo -Viewer Commands->>%appdata%\LogViewer.bat
+echo echo [1] Open log file in system editor>>%appdata%\LogViewer.bat
+echo echo [x] Exit Log Viewer>>%appdata%\LogViewer.bat
+echo echo. >>%appdata%\LogViewer.bat
+echo set /p opcja= ">">>%appdata%\LogViewer.bat
+echo if "%opcja%"=="1" goto :notepad>>%appdata%\LogViewer.bat
+ echo if "%opcja%"=="x" goto :quit>>%appdata%\LogViewer.bat
+ echo :notepad>>%appdata%\LogViewer.bat>nul
+ echo start notepad.exe %log%>>%appdata%\LogViewer.bat
+echo :quit>>%appdata%\LogViewer.bat
+echo exit>>%appdata%\LogViewer.bat
+
+:start
+echo [BATCHTASTIC LAUNCHER at %TIME%] Displaying the Soundboard...>>%log%
+set status=The player is currently idle.
+set filestatus=NO FILE IS LOADED.
+set alternatestatus=The player is currently idle.
+cls
+ping localhost -n 0.5>nul
+goto :menu
+
+
+
+:menu
+cls
+Mode con cols=80 lines=11 >nul
+setlocal enableDelayedExpansion>nul
+tasklist /FI "IMAGENAME eq wscript.exe" 2>NUL | find /I /N "wscript.exe">NUL
+if "%ERRORLEVEL%"=="1" set status=The player is currently idle.
+if "%ERRORLEVEL%"=="1" set filestatus=NO FILE LOADED.
+if "%ERRORLEVEL%"=="1" set statusSymbol=■
+
+
+set /a size=80-1 &
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=-SOUNDBOARD-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+set s=Welcome^^!                           ⌐♭¬                             %DATE%
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ echo ================================== STATUS ======================================
+set /a size=80-1 &
+
+set s=%status%
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=%filestatus%
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+echo ________________________________________________________________________________
+echo  [/] Open   [-] Stop         ║  ----[%statusSymbol%]---- ║        [?] Settings   [X] Close
+echo.
+set /p opcja= ">"
+if "%opcja%"=="/" goto :openaudio
+ if "%opcja%"=="-" goto :stopaudio
+ if "%opcja%"=="?" goto :config
+ if "%opcja%"=="x" goto :x
+echo [BATCHTASTIC LAUNCHER at %TIME%] The Soundboard was displayed. >>%log%
+
+:playbackProperties
+Mode con cols=80 lines=11 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Playback Properties menu.>>%log%
+cls
+echo [-] Return
+echo.
+echo.
+echo.
+set s=[Batchtastic Music Player]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Select how music should be played.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[c] consecutively (►)  
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[l] infinitely loop (∞)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+
+set /p opcja= "-> "
+  if "%opcja%"=="l" del "%appdata%\config\user\ConsecutiveAudio">nul
+ if "%opcja%"=="l" echo true>%appdata%\config\user\LoopAudio
+  if "%opcja%"=="l" set playDesc=Infinitely Loop
+ if "%opcja%"=="c" del "%appdata%\config\user\LoopAudio">nul
+ if "%opcja%"=="c" set playDesc=Consecutively Play
+ if "%opcja%"=="c" echo true>%appdata%\config\user\ConsecutiveAudio & goto :openaudio
+ if "%opcja%"=="-" goto :openaudio
+
+                                           
+:openaudio
+color %kolor%
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Open Audio File menu.>>%log%
+cls
+echo [-] Return   [p] Playback Properties
+echo.
+echo.
+echo.
+set s=[Open File and %playDesc%]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Please input the location of the media file, then press Enter. 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+                          
+set s=Audio and MIDI files stored locally or on the internet can be played.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Right click to insert a copied address from your computer's clipboard.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+ 
+set /p lokalizacja-utworu="->"
+if "%lokalizacja-utworu%"=="-" goto :menu
+if "%lokalizacja-utworu%"=="p" goto :playbackProperties
+
+
+cls
+set str1="%lokalizacja-utworu%"
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Determining file location...>>%log%
+if not x%str1:http=%==x%str1% set filedistance=remote
+if not x%str1:ftp=%==x%str1% set filedistance=remote
+if not x%str1:smb=%==x%str1% set filedistance=remote
+if not x%str1:http=%==x%str1% set fileregion=the internet:
+if not x%str1:ftp=%==x%str1% set fileregion=an FTP file server:
+if not x%str1:smb=%==x%str1% set fileregion=an SMB file server: 
+if not x%str1:http=%==x%str1% goto :internetcheck
+if not x%str1:ftp=%==x%str1% goto :internetcheck
+if not x%str1:smb=%==x%str1% goto :internetcheck
+
+if exist "%lokalizacja-utworu%" (set filedistance=local) else (set filedistance=remote)
+if exist "%lokalizacja-utworu%" (set fileregion=%COMPUTERNAME%:)
+if exist "%lokalizacja-utworu%" (goto :beginstream) else goto :invalidfile
+
+:internetcheck
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] The requested file is located in a remote location.>>%log%
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Attempting to connect to server...>>%log%
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Connecting to server...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Connecting to server...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Connecting to server...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Connecting to server...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping www.windywindows.wordpress.com >nul
+if errorlevel 1 (goto :nostreamaccess) else (goto :beginstream)
+
+:nostreamaccess
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ErrorSound.vbs
+echo [BATCHTASTIC SOFTWARE UPDATER at %TIME%] COULD NOT CONNECT TO SERVER.>>%log%
+color 0c
+echo.
+echo.
+echo.
+echo.
+set s=-NETWORK ERROR-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic cannot connect to the server hosting the media file.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Please check your internet connection.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(0x800704c9L - ERROR_CONNECTION_REFUSED)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[OK]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+goto :openaudio
+
+:invalidfile
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ErrorSound.vbs
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] FILE LOCATION ERROR AT %lokalizacja-utworu%. >>%log%
+color 0c
+echo. 
+echo.
+echo.
+echo.
+set s=-FILE LOCATION ERROR-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=The requested file does not exist at the current address.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(0x80072030L - ERROR_DS_NO_SUCH_OBJECT)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[OK]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+goto :openaudio
+
+
+:beginstream
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Starting audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Stopping wscript...>>%log%
+Taskkill /IM "wscript.exe" /F 2>nul
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Streaming audio from %lokalizacja-utworu%.>>%log%
+
+if exist "%appdata%\config\user\ConsecutiveAudio" goto :ConsecutivePlay
+if exist "%appdata%\config\user\LoopAudio" goto :LoopPlay
+
+:ConsecutivePlay
+if exist "%appdata%\scripts\PlayMusic.vbs" (del "%appdata%\scripts\PlayMusic.vbs")>nul
+(
+echo Play "%lokalizacja-utworu%"
+echo Sub Play(URL^)
+echo    Dim Sound
+echo    Set Sound = CreateObject("WMPlayer.OCX"^)
+echo    Sound.URL = URL
+echo    Sound.settings.volume = 100
+echo    Sound.Controls.play
+echo    do while Sound.currentmedia.duration = 0
+echo        wscript.sleep 100
+echo    loop
+echo    wscript.sleep (int(Sound.currentmedia.duration^)+1^)*1000
+echo End Sub 
+)>%appdata%\scripts\PlayMusic.vbs
+start %appdata%\scripts\PlayMusic.vbs
+set statusSymbol=►
+goto :setstatus
+
+:LoopPlay
+if exist "%appdata%\scripts\LoopPlayMusic.vbs" (del "%appdata%\scripts\LoopPlayMusic.vbs")>nul
+
+echo Option Explicit >>%appdata%\scripts\LoopPlayMusic.vbs
+echo Dim SoundFile >>%appdata%\scripts\LoopPlayMusic.vbs
+echo SoundFile = "%lokalizacja-utworu%" >>%appdata%\scripts\LoopPlayMusic.vbs
+echo Call Play(SoundFile) >>%appdata%\scripts\LoopPlayMusic.vbs
+echo '******************************************* >>%appdata%\scripts\LoopPlayMusic.vbs
+echo Sub Play(SoundFile) >>%appdata%\scripts\LoopPlayMusic.vbs
+echo    Dim oPlayer >>%appdata%\scripts\LoopPlayMusic.vbs
+echo   Set oPlayer = CreateObject("WMPlayer.OCX") >>%appdata%\scripts\LoopPlayMusic.vbs
+echo ' Play audio >>%appdata%\scripts\LoopPlayMusic.vbs
+echo    oPlayer.URL = SoundFile >>%appdata%\scripts\LoopPlayMusic.vbs
+echo    oPlayer.settings.volume = 100 >>%appdata%\scripts\LoopPlayMusic.vbs
+echo    oPlayer.settings.setMode "loop", True >>%appdata%\scripts\LoopPlayMusic.vbs
+echo    'MsgBox oPlayer.settings.getMode("loop") >>%appdata%\scripts\LoopPlayMusic.vbs       
+echo   oPlayer.controls.play >>%appdata%\scripts\LoopPlayMusic.vbs
+echo   While oPlayer.playState ^<^> 1 ' 1 = Stopped >>%appdata%\scripts\LoopPlayMusic.vbs
+echo        WScript.Sleep 100 >>%appdata%\scripts\LoopPlayMusic.vbs
+echo    Wend >>%appdata%\scripts\LoopPlayMusic.vbs
+echo' Release the audio file >>%appdata%\scripts\LoopPlayMusic.vbs
+echo    oPlayer.close >>%appdata%\scripts\LoopPlayMusic.vbs
+echo End Sub >>%appdata%\scripts\LoopPlayMusic.vbs
+start %appdata%\scripts\LoopPlayMusic.vbs
+set statusSymbol=∞
+goto :setstatus
+
+
+
+
+
+
+
+:setstatus
+Set filename=%lokalizacja-utworu%
+For %%A in ("%filename%") do (
+    Set folder=%%~dpA
+    Set nazwa=%%~nxA
+)
+set status=♫ Playing %filedistance% audio from %fileregion%
+set filestatus=%nazwa%
+set alternatestatus= ♫ NOW PLAYING: "%nazwa%"
+goto :menu
+
+:stopaudio
+cls
+set status=The player is currently idle.
+set filestatus=NO FILE LOADED.
+set alternatestatus=The player is currently idle.
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Stopping wscript...>>%log%
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Stopping audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Stopping audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Stopping audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Stopping audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Stopping audio stream...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+set statusSymbol=■
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Stopping wscript...>>%log%
+Taskkill /IM "wscript.exe" /F >nul
+TimeOut /T 1 /NoBreak>>nul
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Completed; all audio has been stopped.>>%log%
+title Batchtastic Music Player
+goto :menu
+
+:config
+tasklist /FI "IMAGENAME eq wscript.exe" 2>NUL | find /I /N "wscript.exe">NUL
+if "%ERRORLEVEL%"=="1" set status=The player is currently idle.
+if "%ERRORLEVEL%"=="1" set filestatus=NO FILE LOADED.
+if "%ERRORLEVEL%"=="1" set alternatestatus=The player is currently idle.
+if "%ERRORLEVEL%"=="1" set statusSymbol=■
+
+color %kolor%
+Mode con cols=80 lines=13>nul
+cls
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=-CONFIGURATION PANEL-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+echo %alternatestatus%
+ echo ================================== SETTINGS ====================================
+ echo                         [1] Check for Updates
+ echo                         [2] View the Software Activity Log
+ echo                         [3] Sounds and Audio Configuration
+ echo                         [4] User Personalization
+echo ________________________________________________________________________________
+echo  [n] Next page   [-] Return  ║  ----[%statusSymbol%]---- ║                       [X] Close
+echo.
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Settings menu. >>%log%
+set /p opcja= ">"
+if "%opcja%"=="1" goto :aktualizacja
+ if "%opcja%"=="2" goto :log
+ if "%opcja%"=="3" goto :soundConfig
+ if "%opcja%"=="4" goto :tematMenu
+ if "%opcja%"=="n" goto :suppinfo
+   if "%opcja%"=="-" goto :menu
+  if "%opcja%"=="x" goto :x
+
+:suppinfo
+color %kolor%
+tasklist /FI "IMAGENAME eq wscript.exe" 2>NUL | find /I /N "wscript.exe">NUL
+if "%ERRORLEVEL%"=="1" set status=The player is currently idle.
+if "%ERRORLEVEL%"=="1" set filestatus=NO FILE LOADED.
+if "%ERRORLEVEL%"=="1" set alternatestatus=The player is currently idle.
+if "%ERRORLEVEL%"=="1" set statusSymbol=■
+
+Mode con cols=80 lines=13>nul
+cls
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=-CONFIGURATION PANEL-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+echo %alternatestatus%
+ echo ===========================INFORMATION AND SUPPORT==============================
+echo                          [*] View Licencing Documentation
+echo                          [:] Visit Developer Website
+echo                          [@] Contact Developer
+echo                          [i] About Batchtastic Music Player
+echo ________________________________________________________________________________
+echo  [l] Last page   [-] Return  ║  ----[%statusSymbol%]---- ║                       [X] Close
+echo.
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Information and Support menu. >>%log%
+set /p opcja= ">"
+if "%opcja%"=="l" goto :config
+ if "%opcja%"=="*" goto :eula
+ if "%opcja%"==":" goto :windywindows
+ if "%opcja%"=="@" goto :kontakt
+ if "%opcja%"=="i" goto :informacjeLoad
+ if "%opcja%"=="-" goto :menu
+ if "%opcja%"=="x" goto :x
+ 
+
+:aktualizacja
+Mode con cols=80 lines=11 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] User %USERNAME% requested an update scan.>>%log%
+cls
+echo [BATCHTASTIC SOFTWARE UPDATE DAEMONty at %TIME%] Downloading update information from database...>>%log%
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Checking for updates...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+Ping www.windywindows.wordpress.com -n 1 -w 1000 >> %log%
+if errorlevel 1 (goto :nointernet) else (goto :contupdate)
+
+:nointernet
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ErrorSound.vbs
+echo [BATCHTASTIC SOFTWARE UPDATE DAEMON at %TIME%] COULD NOT CONNECT TO DATABASE.>>%log%
+color 0c
+echo.
+echo.
+echo.
+echo.
+set s=-NETWORK ERROR-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic cannot connect to the update database.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Please check your internet connection.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(0x800704c9L - ERROR_CONNECTION_REFUSED)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[OK]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+goto :config
+
+:contupdate
+if exist %download%\BATASTUPD.akt (del %download%\BATASTUPD.akt) >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Checking for updates...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Checking for updates...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+bitsadmin /transfer myDownloadJob /download /priority high https://windywindowsfiles.000webhostapp.com/files/software/batchtastic/database/updates/BATAS-EN1167.png %download%\BATASTUPD.akt >>%log%
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Checking for updates...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+del %appdata%\config\user\UpdateDaemonHistory >nul
+echo  at%TIME% on %DATE%>%appdata%\config\user\UpdateDaemonHistory
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Checking for updates...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+if exist %download%\BATASTUPD.akt (goto :NoUpdate) else (goto :UpdateFound) 2>nul
+
+:NoUpdate
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\NudgeSound.vbs
+echo [BATCHTASTIC SOFTWARE UPDATE DAEMON at %TIME%] No updates were found.>>%log%
+color 08
+echo.
+echo.
+echo.
+echo.
+set s=-BATCHTASTIC SOFTWARE UPDATE DAEMON-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Your software version (%wersja%) is up to date.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[OK]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+goto :config
+
+
+
+
+:UpdateFound
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\NotifySound.vbs
+echo [BATCHTASTIC SOFTWARE UPDATE DAEMON at %TIME%] A new software update has been found.>>%log%
+color 0b
+echo.
+echo.
+echo.
+echo.
+set s=-BATCHTASTIC SOFTWARE UPDATE DAEMON-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=There is a newer version of this software available.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Would you like to update?
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[(U)PDATE]  [(C)ANCEL]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set /p opcja= ">"
+if "%opcja%"=="u" goto :downloadInstallAssistant
+if "%opcja%"=="c" goto :config
+goto :config
+
+:downloadInstallAssistant
+  echo [BATCHTASTIC EULA VIEWER at %TIME%] Downloading the Batchtastic Install Assistant....>>%log%
+Mode con cols=80 lines=11 >nul
+color 07
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading update...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading update...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading update...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading update...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+bitsadmin /transfer myDownloadJob /download /priority high https://windywindowsfiles.000webhostapp.com/files/software/batchtastic/database/builds/BatchtasticInstallAssistant.exe %download%\batchtastic-latest.exe >>%log%
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading update...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+if exist %download%\batchtastic-latest.exe goto :InstallReadyNotify
+if not exist %download%\batchtastic-latest.exe goto :InstallDownloadError
+
+
+:InstallReadyNotify
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\NotifySound.vbs
+echo [BATCHTASTIC SOFTWARE UPDATE DAEMON at %TIME%] The Install Assistant has been successully downloaded.>>%log%
+color 0b
+echo.
+echo.
+echo.
+echo.
+set s=-BATCHTASTIC SOFTWARE UPDATE DAEMON-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=The update has been downloaded and is ready to install.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic will now close to begin the installation process.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[OK]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+echo [BATCHTASTIC SOFTWARE UPDATER at %TIME%] Beginning installation.>>%log%
+start %download%\batchtastic-latest.exe
+goto :exit
+
+:InstallDownloadError
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ErrorSound.vbs
+echo [BATCHTASTIC SOFTWARE UPDATE DAEMON at %TIME%] COULD NOT DOWNLOAD THE INSTALL ASSISTANT.>>%log%
+color 0c
+echo.
+echo.
+echo.
+echo.
+set s=-NETWORK ERROR-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=There was an error while downloading the update.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Please check your internet connection.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(0x8007200fL - ERROR_DS_UNAVAILABLE)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[(R)ETRY] [(C)ONTINUE]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= ">"
+if "%opcja%"=="r" goto :downloadInstallAssistant
+if "%opcja%"=="c" goto :config
+goto :config
+
+
+:eula
+color %kolor%
+Mode con cols=80 lines=18 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Licencing menu. >>%log%
+cls
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=-LICENCING AND DISTRUBITION INFORMATION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+set s=The EULA and GPL
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=The EULA and GPL describe what rights and responsibilites both the user and
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Abduktion Studios have in regards to the usage and availability of 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic and its source code.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Creative Commons
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=This describes how one can modify and/or redistribute Batchtastic
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=and the responsibilites that follow through with that.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+
+
+set s=Type the respective command to read the EULA or view the 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Creative Commons licence for this software.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ________________________________________________________________________________
+echo  [e] Read EULA  [c] View Creative Commons  [-] Return
+echo.
+ set /p opcja= ">"
+ if "%opcja%"=="e" goto :licencja
+ if "%opcja%"=="c" goto :creativecommons
+ if "%opcja%"=="-" goto :suppinfo
+
+ :creativecommons
+cls
+Mode con cols=80 lines=13>nul
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\WarningSound.vbs
+color 06
+echo.
+echo.
+echo.
+echo.
+set s=-ATTENTION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic will now start the system default web browser.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=You will temporarily leave the command line.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(The program will remain open)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+echo.
+set s=[(O)KAY] [(C)ANCEL]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= ">"
+if "%opcja%"=="o" start https://creativecommons.org/licenses/by-nc-sa/4.0/ & echo [BATCHTASTIC WEBSITE LAUNCHER at %TIME%] Directing user to https://creativecommons.org/licenses/by-nc-sa/4.0/>>%log% & if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ExternalProgramLaunchSound.vbs
+if "%opcja%"=="c" goto :eula
+goto :eula
+pause >nul
+
+
+
+ :licencja
+ echo [BATCHTASTIC EULA VIEWER at %TIME%] Searching for EULA file...>>%log%
+if exist resources\docs\EULA.txt (goto :licencjaWarn ) else (goto :DownloadEULA)
+:licencjaWarn
+echo [BATCHTASTIC EULA VIEWER at %TIME%] EULA file located at \Program Files (x86)\Batchtastic\resources\docs\EULA.txt >>%log%
+cls
+Mode con cols=80 lines=13>nul
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\WarningSound.vbs
+color 06
+echo.
+echo.
+echo.
+echo.
+set s=-ATTENTION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic will now start the system default text editor.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=You will temporarily leave the command line.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(The program will remain open)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+echo.
+set s=[(O)KAY] [(C)ANCEL]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= ">"
+if "%opcja%"=="o" start resources/docs/EULA.txt &  echo [BATCHTASTIC EULA VIEWER at %TIME%] Opening EULA in system text editor... >>%log% & if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ExternalProgramLaunchSound.vbs
+if "%opcja%"=="c" goto :eula
+goto :eula
+pause >nul
+ 
+:DownloadEULA
+  echo [BATCHTASTIC EULA VIEWER at %TIME%] Downloading the EULA....>>%log%
+Mode con cols=80 lines=11 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading the EULA...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading the EULA...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+bitsadmin /transfer myDownloadJob /download /priority high https://windywindowsfiles.000webhostapp.com/files/software/batchtastic/documentation/bataseula.txt %download%\EULA.txt >>%log%
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading the EULA...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading the EULA...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Downloading the EULA...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+cls
+if not exist %download%\EULA.txt echo [BATCHTASTIC EULA VIEWER at %TIME%] The EULA file could not be found.>>%log%
+if exist %download%\EULA.txt (start %download%\EULA.txt) else (goto :EULAError)
+goto :eula
+
+:EULAError
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ErrorSound.vbs
+color 0c
+echo.
+echo.
+echo.
+echo.
+set s=-NETWORK ERROR-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic cannot download the EULA.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Please check your internet connection.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(0x8007202bL - ERROR_DS_REFERRAL)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[OK]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+goto :suppinfo
+
+:windywindows
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\WarningSound.vbs
+color 06
+echo.
+echo.
+echo.
+echo.
+set s=-ATTENTION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic will now start the system default web browser.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=You will temporarily leave the command line.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(The program will remain open)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+echo.
+set s=[(O)KAY] [(C)ANCEL]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= ">"
+if "%opcja%"=="o" start https://windywindows.wordpress.com & echo [BATCHTASTIC WEBSITE LAUNCHER at %TIME%] Directing user to https://windywindows.wordpress.com>>%log% & if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ExternalProgramLaunchSound.vbs
+if "%opcja%"=="c" goto :suppinfo
+goto :suppinfo
+pause >nul
+
+:kontakt
+setlocal enabledelayedexpansion >nul
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\WarningSound.vbs
+color 06
+echo.
+echo.
+echo.
+echo.
+set s=-ATTENTION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic will now start the system default email client.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=You will temporarily leave the command line.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(The program will remain open)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+echo.
+set s=[(O)KAY] [(C)ANCEL]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= ">"
+if "%opcja%"=="o" start mailto:cosmicconsole@gmail.com?subject="Feedback from %USERNAME% - Batchtastic v%wersja% %kompilacji% (%nazwakompilacji%)  - %winver%" & echo [BATCHTASTIC USER SUPPORT SERVICE at %TIME%] Opening system default mail client...>>%log% & if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ExternalProgramLaunchSound.vbs
+if "%opcja%"=="c" goto :suppinfo
+goto :suppinfo
+
+
+
+goto :suppinfo
+
+:log
+Mode con cols=80 lines=11 >nul
+echo [BATCHTASTIC LOG VIEWER at %TIME%] Searching for log file...>>%log%
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Opening log file...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ if exist %log%  echo [BATCHTASTIC LOG VIEWER at %TIME%] Log file located. Starting Log Viewer...>>%log%
+if exist %log% start %appdata%\LogViewer.bat 2>nul
+if not exist %log% echo [BATCHTASTIC LOG VIEWER at %TIME%] Log file could not  be located.>>%log%
+if not exist %log%  goto :NoLOG
+goto :config
+
+:NoLOG
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\ErrorSound.vbs
+color 0c
+echo.
+echo.
+echo.
+echo.
+set s=-MISSING FILE ERROR-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic could not open the log file.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=The file was most likely deleted by an external source.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=(0x80072030L - ERROR_DS_NO_SUCH_OBJECT)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[OK]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+goto :config
+
+:tematMenu
+color %kolor%
+Mode con cols=80 lines=15 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed User Personalization menu.>>%log%
+cls
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=-SETTINGS: USER PERSONALIZATION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+echo.
+echo.
+echo.
+set s=[1] Change UI theme
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Change the colour of the text and background.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+echo.
+echo.
+echo ________________________________________________________________________________
+echo  %statusSymbol%                                                                  [-] Return
+echo.
+ set /p opcja= ">"
+ if "%opcja%"=="1" goto :tematConfig
+ if "%opcja%"=="-" goto :config
+
+:tematConfig
+Mode con cols=80 lines=11 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Theme Settings menu.>>%log%
+cls
+echo [-] Return
+echo.
+echo.
+echo.
+set s=[Batchtastic User Personalization]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Which theme would you like to enable?
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[d] dark theme
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[l] light theme
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= "-> "
+
+ if "%opcja%"=="l" color 70 & goto :light
+ if "%opcja%"=="d" color 07 & goto :dark
+ if "%opcja%"=="-" goto :tematMenu
+ 
+ :light
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\SuccessSound.vbs
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled the light theme.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled the light theme.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled the light theme.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled the light theme.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 3 >nul
+if exist %appdata%\config\user\DarkModeEnabled (del %appdata%\config\user\DarkModeEnabled)
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Enabled the light theme.>>%log%
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Saving setting to disk...>>%log%
+set kolor=70
+echo true >>%appdata%\config\user\LightModeEnabled
+goto :tematMenu
+ :dark
+ if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\SuccessSound.vbs
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled the dark theme.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled the dark theme.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled the dark theme.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled the dark theme.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 3 >nul
+if exist %appdata%\config\user\LightModeEnabled (del %appdata%\config\user\LightModeEnabled)
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Enabled the dark theme.>>%log%
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Saving setting to disk...>>%log%
+set kolor=07
+echo true >>%appdata%\config\user\DarkModeEnabled
+goto :tematMenu
+
+:soundConfig
+color %kolor%
+Mode con cols=80 lines=15 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Sounds and Audio Configuration menu.>>%log%
+cls
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=-SETTINGS: SOUNDS AND AUDIO CONFIGURATION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+set s=[1] Configure UI Feedback Sounds
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Enable or disable the different sounds that play when using Batchtastic.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[2] Sounds Test
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Sample and test the functionally of the UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s= [3] System Audio Setup
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Ensure your sound device is working properly and change its settings.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ________________________________________________________________________________
+echo  %statusSymbol%                                                                  [-] Return
+echo.
+ set /p opcja= ">"
+ if "%opcja%"=="1" goto :soundSettings
+ if "%opcja%"=="2" goto :soundsTestCheck
+ if "%opcja%"=="3" goto :systemAudioSetupCheck
+ if "%opcja%"=="-" goto :config
+
+:soundSettings
+Mode con cols=80 lines=11 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed UI Feedback Sounds Settings menu.>>%log%
+cls
+echo [-] Return
+echo.
+echo.
+echo.
+set s=[Configure UI Feedback Sounds]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=What would you like to do?
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[e] Enable UI feedback sounds  
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[d] Disable UI feedback sounds
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= "-> "
+
+ if "%opcja%"=="e" goto :enablesounds
+ if "%opcja%"=="d" goto :disablesounds
+ if "%opcja%"=="-" goto :soundConfig
+ 
+:enablesounds
+if exist %appdata%\config\user\SoundsDisabled (del %appdata%\config\user\SoundsDisabled)
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\SuccessSound.vbs
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Enabled UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 3 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Enabled sounds.>>%log%
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Saving setting to disk...>>%log%
+echo true >>%appdata%\config\user\SoundsEnabled
+goto :soundConfig
+
+:disablesounds
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Disabled UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Disabled UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Disabled UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1.5 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Disabled UI feedback sounds.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Saving changes...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 3 >nul
+if exist %appdata%\config\user\SoundsEnabled (del %appdata%\config\user\SoundsEnabled)
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Disabled sounds.>>%log%
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Saving setting to disk...>>%log%
+echo true >>%appdata%\config\user\SoundsDisabled
+goto :soundConfig
+
+:soundsTestCheck
+color %kolor%
+tasklist /FI "IMAGENAME eq wscript.exe" 2>NUL | find /I /N "wscript.exe">NUL
+if "%ERRORLEVEL%"=="0" goto :soundsTestConfirmation
+if "%ERRORLEVEL%"=="1" goto :soundsTest
+
+:soundsTestConfirmation
+Mode con cols=80 lines=13>nul
+setlocal enabledelayedexpansion >nul
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\WarningSound.vbs
+color 06
+echo.
+echo.
+echo.
+echo.
+set s=-ATTENTION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=There is currently a loaded media file.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=To use the Sounds Test menu, the media must be stopped.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Would you like to continue?
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+echo.
+set s=[(C)ONTINUE] [(R)ETURN]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= ">"
+if "%opcja%"=="c" goto :soundsTest & Taskkill /IM "wscript.exe" /F >nul
+if "%opcja%"=="r" goto :soundConfig
+
+:soundsTest
+color %kolor%
+Mode con cols=80 lines=11 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Sounds Test menu.>>%log%
+cls
+echo [-] Return
+echo.
+echo.
+echo.
+set s=[Sounds Test]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Enter the code respective to the desired sound to test.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[E1] [N1] [N2] [S1] [S2] [W1] [SS] [IS] [ES]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= "-> "
+
+ if "%opcja%"=="e1" start resources\scripts\ErrorSound.vbs
+ if "%opcja%"=="n1" start resources\scripts\NotifySound.vbs
+ if "%opcja%"=="n2" start resources\scripts\NudgeSound.vbs
+ if "%opcja%"=="s1" start resources\scripts\SuccessSound.vbs
+ if "%opcja%"=="s2" start resources\scripts\ExternalProgramLaunchSound.vbs
+ if "%opcja%"=="w1" start resources\scripts\WarningSound.vbs
+ if "%opcja%"=="ss" start resources\scripts\SoundSignature.vbs
+ if "%opcja%"=="is" start resources\scripts\StartSound.vbs
+ if "%opcja%"=="es" start resources\scripts\ExitSound.vbs
+ if "%opcja%"=="-" goto :soundConfig
+ goto :soundsTest
+ 
+ :systemAudioSetupCheck
+color %kolor%
+tasklist /FI "IMAGENAME eq wscript.exe" 2>NUL | find /I /N "wscript.exe">NUL
+if "%ERRORLEVEL%"=="0" goto :systemAudioSetupConfirmation
+if "%ERRORLEVEL%"=="1" goto :systemAudioSetup
+ 
+ :systemAudioSetupConfirmation
+ Mode con cols=80 lines=13>nul
+setlocal enabledelayedexpansion >nul
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\WarningSound.vbs
+color 06
+echo.
+echo.
+echo.
+echo.
+set s=-ATTENTION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=There is currently a loaded media file.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=To configure system audio, the media must be stopped.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Would you like to continue?
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+echo.
+set s=[(C)ONTINUE] [(R)ETURN]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= ">"
+if "%opcja%"=="c" Taskkill /IM "wscript.exe" /F >nul & goto :systemAudioSetup
+if "%opcja%"=="r" goto :soundConfig
+
+:systemAudioSetup
+color %kolor%
+Mode con cols=80 lines=11 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed System Audio Setup menu.>>%log%
+cls
+echo [-] Return
+echo.
+echo.
+echo.
+set s=[System Audio Setup]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=What would you like to do?
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[t] Test default audio device       
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[c] Change volume or device settings
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= "-> "
+
+ if "%opcja%"=="t" goto :audioDeviceTest
+ if "%opcja%"=="c" goto :audioDeviceConfig
+ if "%opcja%"=="-" goto :soundConfig
+
+:audioDeviceTest
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\NudgeSound.vbs
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed Audio Device Test menu.>>%log%
+color 08
+echo.
+echo.
+echo.
+set s=-INFORMATION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic will play an elongated sound to test if your audio
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=device is configured correctly. Press the "Enter" key when you
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=are ready to start the test.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[START]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+cls
+start resources\scripts\SystemAudioTest.vbs
+color %kolor%
+echo [BATCHTASTIC SYSTEM CONFIGURATION at %TIME%] Initiated the audio device test...>>%log%
+echo.
+echo.
+echo.
+set s=-Audio Device Test-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Now playing test audio sample.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=If your device is configured correctly, you should be able to hear
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=the chorus song of the bladder cicada (Cystosoma saundersii).
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 4.5>nul
+cls
+echo.
+echo.
+echo.
+set s=-Audio Device Test-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Now playing test audio sample.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=If your device is configured correctly, you should be able to hear
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=the chorus song of the bladder cicada (Cystosoma saundersii).
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 4.5>nul
+cls
+echo.
+echo.
+echo.
+set s=-Audio Device Test-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Now playing test audio sample.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=If your device is configured correctly, you should be able to hear
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=the chorus song of the bladder cicada (Cystosoma saundersii).
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 4.5>nul
+cls
+echo.
+echo.
+echo.
+set s=-Audio Device Test-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Now playing test audio sample.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=If your device is configured correctly, you should be able to hear
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=the chorus song of the bladder cicada (Cystosoma saundersii).
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 4.5>nul
+cls
+echo.
+echo.
+echo.
+set s=-Audio Device Test-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Now playing test audio sample.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=If your device is configured correctly, you should be able to hear
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=the chorus song of the bladder cicada (Cystosoma saundersii).
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 5.1>nul
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\NudgeSound.vbs
+echo [BATCHTASTIC USER INTERFACE at %TIME%] System audio device test complete.>>%log%
+color 08
+echo.
+echo.
+echo.
+set s=-INFORMATION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=The audio device test has been completed. If you did not hear
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=any sound, confirm the proper configuration for your device by
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=by pressing the 'C' key on the System Audio Setup menu.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=[RETURN]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+pause >nul
+goto :systemAudioSetup
+
+:audioDeviceConfig
+Mode con cols=80 lines=13>nul
+setlocal enabledelayedexpansion >nul
+cls
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\WarningSound.vbs
+color 06
+echo.
+echo.
+echo.
+echo.
+set s=-ATTENTION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic will now open the Audio Properties Configuration Panel.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=This is a Windows system dialog. The program will remain open
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Would you like to continue?
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+echo.
+set s=[(C)ONTINUE] [(R)ETURN]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set /p opcja= ">"
+if "%opcja%"=="c" start control mmsys.cpl & start resources\scripts\ExternalProgramLaunchSound.vbs
+if "%opcja%"=="r" goto :systemAudioSetup
+goto :systemAudioSetup
+
+
+ 
+:informacjeLoad
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Retrieving network status information...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 1 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Retrieving network status information...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Locating local IP address...>>%log%
+for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 %ComputerName% ^| findstr [') do set lokalneIP=%%a
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] The system's local IP address is: %lokalneIP%>>%log%
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Locating external IP address...>>%log%
+for /f %%a in ('powershell Invoke-RestMethod api.ipify.org') do set publiczneIP=%%a
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] The system's public IP address is: %publiczneIP%>>%log%
+ping www.windywindows.wordpress.com >nul
+if errorlevel 1 (set workingonline=Working offline) else (set workingonline=Working online)
+if errorlevel 1 (set publiczneIP=---.---.-.-)
+if errorlevel 1 (echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Batchtastic is working offline.>>%log%) else (echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Batchtastic is working online.>>%log%)
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Retrieving network status information...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Compiling technical information...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+tasklist /FI "IMAGENAME eq wscript.exe" 2>NUL | find /I /N "wscript.exe">NUL
+if "%ERRORLEVEL%"=="0" set scriptStatus=active
+if "%ERRORLEVEL%"=="1" set scriptStatus=unactive
+if "%ERRORLEVEL%"=="0" set memoryStatus=script files loaded in memory
+if "%ERRORLEVEL%"=="1" set memoryStatus=working memory free
+for /f "tokens=2" %%a in ('tasklist^|find /i "batchtastic.exe"') do (set pid=%%a)
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Please wait.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Compiling technical information...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+if not exist %appdata%\config\user\UpdateDaemonHistory (echo : never^^! >%appdata%\config\user\UpdateDaemonHistory)
+for /f "delims=" %%x in (%appdata%\config\user\UpdateDaemonHistory) do set "UpdateStatus=%%x"
+
+for /f %%A in ('dir %appdata%\config\user\^| find "File(s)"') do set configFileCount=%%A
+for /f %%A in ('dir %appdata%\resources\log\^| find "File(s)"') do set logFileCount=%%A
+
+
+ping localhost -n 1 >nul
+
+:informacje
+Mode con cols=80 lines=18 >nul
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed About Page 1 menu.>>%log%
+cls
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=-TECHNICAL INFORMATION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+set s=Software Version
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=v%wersja% "%nazwakompilacji%"
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Software Build
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=%kompilacji% (compiled on 13/11/2020 at 03:46:20)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Log and User Settings Storage Directory
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=%appdata%
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Networking Information
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=%workingonline% at %lokalneIP% (local) and %publiczneIP% (public)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ________________________________________________________________________________
+echo  [n] Next page   [c] Credits  ║  ------------- ║                     [-] Return
+echo.
+ set /p opcja= ">"
+ if "%opcja%"=="n" goto :informacje2
+  if "%opcja%"=="-" goto :suppinfo
+  if "%opcja%"=="c" goto :credits
+
+:informacje2
+setlocal enableDelayedExpansion>nul
+Mode con cols=80 lines=18 >nul
+for /f %%A in ('dir %appdata%\resources\log\^| find "File(s)"') do set logFileCount=%%A
+tasklist /FI "IMAGENAME eq wscript.exe" 2>NUL | find /I /N "wscript.exe">NUL
+if "%ERRORLEVEL%"=="0" set scriptStatus=active
+if "%ERRORLEVEL%"=="1" set scriptStatus=unactive
+if "%ERRORLEVEL%"=="0" set memoryStatus=script files loaded in memory
+if "%ERRORLEVEL%"=="1" set memoryStatus=working memory free
+for /f "tokens=2" %%a in ('tasklist^|find /i "batchtastic.exe"') do (set pid=%%a)
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed About Page 2 menu.>>%log%
+cls
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=-TECHNICAL INFORMATION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+set s=Process Status
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Script Files: %scriptStatus%, %memoryStatus%
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Process ID: %pid%
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Update Daemon Status
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Last checked for updates%UpdateStatus%.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Check for updates by pressing '1' on the Configuration Panel.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Program Files Information
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Current number of configuration files (user data): %configFileCount%
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Current number of program log files (program activity): %logFileCount%
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ________________________________________________________________________________
+echo  [n] Next page  [l] Last page ║  ------------- ║                     [-] Return
+echo.
+ set /p opcja= ">"
+ if "%opcja%"=="n" goto :informacje3
+  if "%opcja%"=="l" goto :informacje
+  if "%opcja%"=="-" goto :suppinfo
+  if "%opcja%"=="c" goto :credits
+  
+
+  
+:informacje3
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Displayed About Page 2 menu.>>%log%
+cls
+set s=Batchtastic Music Player
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=-LEGAL-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ================================================================================
+set s=Fine Print
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Batchtastic Music Player comes with ABSOLUTELY NO WARRANTY.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Distributed under the GNU General Public License (GPL v3), 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=this is free software, and you are welcome to redistribute
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s= it under certain conditions. For more details, visit the 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s="Read EULA and licence documentation" sub-menu in the Configuration Panel.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=------[♭]------
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=The Batchtastic Music Player name and identity is ©2015-2020
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+
+set s=Green Darner Computer Software Foundation / ABDUKTION STUDIOS MEDIA GROUP
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo ________________________________________________________________________________
+echo  [l] Last page   [c] Credits  ║  ------------- ║                     [-] Return
+echo.
+ set /p opcja= ">"
+ if "%opcja%"=="l" goto :informacje2
+  if "%opcja%"=="-" goto :suppinfo
+  if "%opcja%"=="c" goto :credits
+  
+ :credits
+ tasklist /FI "IMAGENAME eq wscript.exe" 2>NUL | find /I /N "wscript.exe">NUL
+if "%ERRORLEVEL%"=="0" goto :beginSequence
+if "%ERRORLEVEL%"=="1" goto :SequenceMusic
+ echo [BATCHTASTIC USER INTERFACE at %TIME%] Began credits sequence.>>%log%
+ 
+ :SequenceMusic
+if not exist %appdata%\config\user\SoundsDisabled (start resources\scripts\CreditsSequenceMusic.vbs)
+goto :beginSequence
+:beginSequence
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=BATCHTASTIC MUSIC PLAYER
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Command Line Music Application
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Presented by
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Green Darner Computer Software Foundation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+ping localhost -n 10 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Credits
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=-PROJECT MANAGER-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Gryfita Aniskiwicz "Windy Windows"
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=-HEAD PROGRAMMER-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Gryfita Aniskiwicz "Windy Windows"
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+ping localhost -n 10 >nul
+cls
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Special Thanks
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=NIV:
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Girlfriend and source of inspiration, support, and love
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=SANJEEV SRIVATSAN:
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Closest friend
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=CONNOR "DATGUY":
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Close friend; Batchtastic veteran
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=DIONIZJA BRZEZICKI:
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Guidance councillor (for whom I am eternally grateful)
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=MY FAMILY:
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Genes, upbringing, and unconditional love
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 10 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Development Assistance
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=-PROGRAMMING ASSISTANCE-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=The People of StackExchange
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=-FEATURE IMPLEMENTATION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Microsoft Developer Docs, courtesy of Microsoft Corporation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=-SOURCE CODE AND RESOURCE DISTRIBUTION-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=GitHub
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+ping localhost -n 10 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Media and Graphic Resources
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=-USER INTERFACE SOUNDS-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=KDE Plasma System Sounds, courtesy of KDE e.V.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=-BATCHTASTIC LOGO, ICONS, AND MARKETING MATERIAL-
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic Logo, courtesy of Green Darner Computer Software Foundation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Windows 10®  Command Prompt Icon, courtesy of Microsoft Corporation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 10 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Embbedded Technologies
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s="Windows Media Player," courtesy of Microsoft Corporation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s="Windows Script Host, VBScript," courtesy of Microsoft Corporation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s="BITSADMIN," courtesy of Microsoft Corporation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s="Software Update Daemon," courtesy of Green Darner Computer Software Foundation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s="Log File Reader," courtesy of Green Darner Computer Software Foundation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 10 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Developmental Software and Services
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s="GNU Image Manipulation Program," courtesy of The GIMP Team
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s="IcoFX," courtesy of IcoFX Software
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s="Notepad Plus Plus," courtesy of Don Ho
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s="InstallForge," courtesy  of Solicus Software
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s="Inkscape,"courtesy of The Inkscape Project
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 10 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Acknowledgements
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Batchtastic Music Player is free software, distributed 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=under the GNU General Public License (GPL v3).
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s= All relevant media works for and within this software
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s= is licensed under a Creative Commons CC BY-NC-SA 4.0 License.
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 10 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=ADMIRATIONS
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Thank you to
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=%USERNAME%, the current user, as well as every other
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=wonderful person who uses and contributes to
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Batchtastic Music Player. This project couldn't
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=exist with out you^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 20 >nul
+
+taskkill /IM wscript.exe /F >nul 2>&1
+if not exist %appdata%\config\user\SoundsDisabled start resources\scripts\SoundSignature.vbs
+cls
+echo.
+echo.
+echo.
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Acknowledgements
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=════════════════════════ 
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s=Developed by
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Green Darner Computer Software Foundation
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s= a subsidiary of ABDUKTION STUDIOS MEDIA GROUP
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s= in Żyrardów, mazowieckie, Poland
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+echo.
+set s= COPYRIGHT © 2015-2020
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 10 >nul
+taskkill /IM wscript.exe /F >nul 2>&1
+echo [BATCHTASTIC USER INTERFACE at %TIME%] Finished credits sequence.>>%log%
+goto :informacje
+
+
+
+ :x
+echo [BATCHTASTIC MUSIC PLAYER at %TIME%] Stopping wscript...>>%log%
+taskkill /IM wscript.exe /F >nul 2>&1
+cls
+echo [BATCHTASTIC EXIT at %TIME%] Closing Batchtastic...>>%log%
+Mode con cols=80 lines=11>nul
+if not exist %appdata%\config\user\SoundsDisabled Start %exitsound% >nul
+setlocal enableDelayedExpansion
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Farewell^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Closing Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[    ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Farewell^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Closing Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[-   ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Farewell^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Closing Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--  ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Farewell^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Closing Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[--- ]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 2 >nul
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+set s=Farewell^^!
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=Closing Batchtastic...
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+set s=[----]
+for /L %%# in (1,2,!size!) do if "!s:~%size%,1!" == "" set "s= !s! "
+set s=!s:~1,%size%!& echo(!s!
+ping localhost -n 5 >nul
+taskkill /IM wscript.exe /F >nul 2>&1
+echo THE APPLICATION PROCESS WAS TERMINATED.>>%log%
